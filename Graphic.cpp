@@ -2,11 +2,25 @@
 
 Graphic::Graphic():
 	w(VideoMode(640, 480), "Tree Graphicator"),
-	node(){
+	nodePadre(),
+	nodeHijo(){
+	
+	nodeHijo.SetPosition(Vector2f(500, 300));
+	nodePadre.AddChild(nodeHijo);
+	
+	
+	///Debug
+	pos = Vector2f(500, 300);
 }
 void Graphic::Play(){
 	while(w.isOpen()){
 		ProcessEvents();
+		
+		/**
+		Debug
+		**/
+		nodeHijo.SetPosition(pos);
+		
 		Draw();
 	};
 }
@@ -24,7 +38,12 @@ void Graphic::ProcessEvents(){
 void Graphic::Draw(){
 	w.clear();
 	
-	w.draw(node, RenderStates::Default);
+	w.draw(nodePadre);
+	w.draw(nodeHijo);
 	
 	w.display();
+}
+template<typename Q>
+void Graphic::GraphTree(tree<Q> T){
+	vector<Node> nodes = TreeManager<Q>::GenerateNodes(T);
 }
