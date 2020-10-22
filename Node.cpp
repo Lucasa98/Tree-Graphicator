@@ -36,7 +36,7 @@ void Node::SetSymbol(char s){
 	symbol = s;
 }
 
-///Graficar
+///Transform
 void Node::SetPosition(Vector2f p){
 	circle.setPosition(p);
 }
