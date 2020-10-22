@@ -1,0 +1,7 @@
+digraph h {
+aaaab[label="a"]
+aaaac[label="b"]
+aaaad[label="c"]
+aaaab->aaaac
+aaaab->aaaad
+}

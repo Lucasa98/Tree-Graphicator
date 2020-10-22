@@ -1,27 +1,38 @@
 #pragma once
 
+#include <map>
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Node.h"
 #include "tree.hpp"
+#include "lisp.hpp"
 #include "TreeManager.h"
 
+using namespace std;
 using namespace aed;
 using namespace sf;
 
 class Graphic {
 private:
 	RenderWindow w;
-	Node nodePadre;
-	Node nodeHijo;
-	
-	Vector2f pos;
+	map<string, Node*> nodes;
 public:
 	Graphic();
-	void Play();
+	template<typename Q>
+	void Play(tree<Q> T){
+		
+		this->GraphTree(T);
+		
+		while(w.isOpen()){
+			ProcessEvents();
+			Draw();
+		};
+	}
 	void ProcessEvents();
 	void Draw();
 	
 	template<typename Q>
-	void GraphTree(tree<Q>);
+	void GraphTree(tree<Q> T){
+		nodes = TreeManager<char>::GenerateNodes(T);
+	}
 };

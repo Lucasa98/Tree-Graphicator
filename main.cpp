@@ -1,10 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include "Graphic.h"
+#include "graphviz.hpp"
+using namespace aed;
 using namespace sf;
 
-int main(int argc, char *argv[]){
+int main(){
 	Graphic graphic;
-	graphic.Play();
+	tree<char> T;
+	lisp2tree("(a b c)", T);
+	graphic.Play(T);
+	
 	return 0;
 }
 

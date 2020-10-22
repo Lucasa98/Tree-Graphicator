@@ -1,3 +1,3 @@
-Centrar lineas de relación de padre a hijos
+Bug al graficar nodos: no se ven los nodos, solo las lineas
 
-pasar de tree<q> a vector<Node> (sin posicionarlos ni nada)
+Posicionar Nodos de forma jerárquica
