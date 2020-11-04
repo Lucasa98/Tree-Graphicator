@@ -37,4 +37,5 @@ public:
 	void SetPosition(Vector2f);
 	Vector2f GetPosition() const;
 	Vector2f GetCenter() const;
+	string GetSymbol();
 };

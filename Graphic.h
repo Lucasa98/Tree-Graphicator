@@ -16,6 +16,7 @@ class Graphic {
 private:
 	RenderWindow w;
 	map<string, Node*> nodes;
+	
 public:
 	Graphic();
 	template<typename Q>

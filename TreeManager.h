@@ -27,13 +27,24 @@ public:
 		///-------------
 		
 		///Posicionar Nodos
-		for(map<string, Node*>::iterator it = map_nodes.begin(); it != map_nodes.end(); ++it){
-			float x = rand()%640;
-			float y = rand()%480;
-			it->second->SetPosition(Vector2f(x, y));
-		}
+		SetPositions(map_nodes, T);
 		///----------------
 		
 		return map_nodes;
+	}
+	
+	static void SetPositions(map<string, Node*>& M, tree<Q> T){
+		vector<list<string>> levels = listLevels(T);
+		for(size_t i = 0; i < levels.size(); ++i){
+			float y = i*(40+10);
+			float w = (levels[i].size()*40) + (10*(levels[i].size()-1));
+			float x = (640-w)/2;
+			
+			int count = 0;
+			for(typename list<string>::iterator n = levels[i].begin(); n != levels[i].end(); ++n){
+				M[*n]->SetPosition(Vector2f(x+count*(40+10), y));
+				++count;
+			}
+		}
 	}
 };

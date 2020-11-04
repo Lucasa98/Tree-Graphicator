@@ -42,13 +42,15 @@ void Node::SetSymbol(string s){
 	text.setString(symbol);
 	text.setFont(font);
 	text.setCharacterSize(charSize);
-	text.setPosition(this->GetCenter());
+	Vector2f c = this->GetCenter();
+	text.setPosition(c.x - (text.getLocalBounds().width/2), c.y - (text.getLocalBounds().height));
 }
 
 ///Transform
 void Node::SetPosition(Vector2f p){
 	circle.setPosition(p);
-	text.setPosition(this->GetCenter());
+	Vector2f c = this->GetCenter();
+	text.setPosition(c.x - (text.getLocalBounds().width/2), c.y - (text.getLocalBounds().height));
 }
 Vector2f Node::GetPosition() const{
 	return circle.getPosition();
@@ -56,4 +58,7 @@ Vector2f Node::GetPosition() const{
 Vector2f Node::GetCenter() const{
 	Vector2f c_pos = circle.getPosition();
 	return Vector2f(c_pos.x + circle.getRadius(), c_pos.y + circle.getRadius());
+}
+string Node::GetSymbol(){
+	return symbol;
 }
