@@ -19,8 +19,9 @@ void Graphic::ProcessEvents(){
 void Graphic::Draw(){
 	w.clear();
 	
-	for(map<string, Node*>::iterator it = nodes.begin(); it != nodes.end(); ++it){
-		w.draw(*(it->second));
+	// -----Dibujar Nodos con aristas a hijos
+	for(map<string, Node*>::iterator n = nodes.begin(); n != nodes.end(); ++n){
+		w.draw(*(n->second));
 	}
 	
 	w.display();

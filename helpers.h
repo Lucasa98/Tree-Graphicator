@@ -15,7 +15,8 @@ Node* tree2map(tree<Q> T, typename tree<Q>::iterator n, map<string, Node*>& node
 	stringstream ss; ss << *n;
 	string s; ss >> s;
 	
-	Node* node = new Node(s);
+	Node* node = new Node();
+	node->SetSymbol(s);
 	nodes[s] = node;
 	
 	typename tree<Q>::iterator c = n.lchild();

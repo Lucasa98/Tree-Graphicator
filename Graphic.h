@@ -33,6 +33,6 @@ public:
 	
 	template<typename Q>
 	void GraphTree(tree<Q> T){
-		nodes = TreeManager<char>::GenerateNodes(T);
+		nodes = TreeManager<Q>::GenerateNodes(T);
 	}
 };

@@ -1,7 +1,17 @@
 digraph h {
-aaaab[label="a"]
-aaaac[label="b"]
-aaaad[label="c"]
+aaaab[label="A"]
+aaaac[label="F"]
+aaaad[label="C"]
+aaaba[label="B"]
+aaabb[label="D"]
+aaabc[label="Z"]
+aaabd[label="E"]
+aaaca[label="G"]
 aaaab->aaaac
 aaaab->aaaad
+aaaab->aaaba
+aaaba->aaabb
+aaabb->aaabc
+aaabb->aaabd
+aaaba->aaaca
 }
