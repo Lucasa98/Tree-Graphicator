@@ -1,13 +1,77 @@
 #pragma once
 
 #include <map>
+#include <list>
 #include <sstream>
 #include "tree.hpp"
 #include "Node.h"
-#include "helpers.h"
 
 using namespace aed;
 using namespace std;
+
+
+///Auxiliar
+template<typename Q>
+tree<string>::iterator treeQ2treestring(tree<Q> TQ, tree<string>& T, tree<string>::iterator n, typename tree<Q>::iterator nq){
+	stringstream ss; ss << *nq;
+	string s; ss >> s;
+	
+	n = T.insert(n, s);
+	
+	typename tree<Q>::iterator cq = nq.lchild();
+	tree<string>::iterator c = n.lchild();
+	
+	while(cq != TQ.end()){
+		c = treeQ2treestring(TQ, T, c, cq++);
+		c++;
+	}
+	return n;
+}
+///Wrapper
+template<typename Q>
+void treeQ2treestring(tree<Q> TQ, tree<string>& Ts){
+	Ts.clear();
+	if(TQ.begin() != TQ.end()){
+		treeQ2treestring(TQ, Ts, TQ.begin(), Ts.begin());
+	}
+}
+
+///Auxiliar
+template<typename Q>
+void herytanceMap(tree<string>& T, map<string,pair<float, list<string>>>& M, tree<string>::iterator n){
+	list<string> Laux;
+	M[*n].second = Laux;
+	
+	tree<string>::iterator c = n.lchild();
+	
+	while(c != T.end()){
+		M[*n].second.push_back(*c);
+		herytanceMap<Q>(T, M, c);
+		++c;
+	}
+}
+///Wrapper
+template<typename Q>
+void herytanceMap(tree<Q>& T,map<string,pair<float, list<string>>>& M) {
+	M.clear();
+	
+	if(T.begin() != T.end()){
+		tree<string> Ts;
+		treeQ2treestring(T, Ts);
+		herytanceMap<Q>(Ts, M, Ts.begin());
+	}
+}
+	
+///Wrapper
+//template<typename Q>
+//map<string, list<string>> tree2herytancemap(tree<Q>& TQ){
+//	map<string, list<string>> M;
+//	if(TQ.begin() != TQ.end()){
+//		tree<string> T = treeQ2treestring(TQ);
+//		tree2herytancemap(T, M, T.begin());
+//	}
+//	return M;
+//}
 
 template<typename Q>
 int altura(tree<Q> T, typename tree<Q>::iterator n, int dist_n){
