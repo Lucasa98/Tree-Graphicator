@@ -5,8 +5,8 @@ using namespace sf;
 
 int main(){
 	Graphic graphic;
-	tree<string> T;
-	lisp2tree("(Source (Fuentes Graphics main Node) (Cabeceras Drawable.h Graphic.h helpers.h Node.h TreeManager.h))", T);
+	tree<int> T;
+	lisp2tree("(1 (2 6 7 8) 3 (4 (9 12)) (5 10 11))", T);
 	graphic.Play(T);
 	
 	return 0;

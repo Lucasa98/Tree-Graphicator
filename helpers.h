@@ -9,7 +9,6 @@
 using namespace aed;
 using namespace std;
 
-
 ///Auxiliar
 template<typename Q>
 tree<string>::iterator treeQ2treestring(tree<Q> TQ, tree<string>& T, tree<string>::iterator n, typename tree<Q>::iterator nq){
@@ -32,27 +31,37 @@ template<typename Q>
 void treeQ2treestring(tree<Q> TQ, tree<string>& Ts){
 	Ts.clear();
 	if(TQ.begin() != TQ.end()){
-		treeQ2treestring(TQ, Ts, TQ.begin(), Ts.begin());
+		treeQ2treestring(TQ, Ts, Ts.begin(), TQ.begin());
 	}
 }
 
-///Auxiliar
+///Auxiliar Devuelve el ancho
 template<typename Q>
-void herytanceMap(tree<string>& T, map<string,pair<float, list<string>>>& M, tree<string>::iterator n){
+int herytanceMap(tree<string>& T, map<string,pair<int, list<string>>>& M, tree<string>::iterator n){
 	list<string> Laux;
 	M[*n].second = Laux;
+	
+	int width = 0;
 	
 	tree<string>::iterator c = n.lchild();
 	
 	while(c != T.end()){
 		M[*n].second.push_back(*c);
-		herytanceMap<Q>(T, M, c);
+		width += herytanceMap<Q>(T, M, c);
 		++c;
 	}
+	
+	if(width == 0){
+		M[*n].first = 1;
+		return 1;
+	}
+	
+	M[*n].first = width;
+	return width;
 }
 ///Wrapper
 template<typename Q>
-void herytanceMap(tree<Q>& T,map<string,pair<float, list<string>>>& M) {
+void herytanceMap(tree<Q>& T,map<string,pair<int, list<string>>>& M) {
 	M.clear();
 	
 	if(T.begin() != T.end()){

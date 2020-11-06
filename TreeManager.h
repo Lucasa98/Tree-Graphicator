@@ -33,20 +33,38 @@ public:
 		return map_nodes;
 	}
 	
-	/**
-	static void SetPositions(map<string, list<string>> M, string n, Vector2f middle){
+	static void SetPositions(map<string, Node*>& M, map<string, pair<int, list<string>>> MH, string n, Vector2f middle){
+		M[n]->SetPosition(middle);
 		
+		float width = (40.f+10.f)*MH[n].first;
+		
+		list<string> childs = MH[n].second;
+		
+		float left = middle.x - (width/2.f);
+		
+		for(list<string>::iterator c = childs.begin(); c != childs.end(); ++c){
+			float cwidth = (40.f+10.f)*MH[*c].first;
+			
+			Vector2f cmid = Vector2f(left + (cwidth/2.f), middle.y + 60);
+			
+			SetPositions(M, MH, *c, cmid);
+			
+			left += cwidth;
+		}
 	}
 	
 	static void SetPositions(map<string, Node*>& M, tree<Q> T){
 		///creamos un mapa que asigna la lista de hijos a cada nodo y el ancho máximo que ocupan los hijos
-		map<string, pair<float, list<string>>> HerytanceMap;
+		map<string, pair<int, list<string>>> HerytanceMap;
 		herytanceMap(T, HerytanceMap);
 		
-		SetPositions(HerytanceMap, *(T.begin()), Vector2f(320.f, 0.f));
-	}1
-	**/
+		stringstream ss; ss << *(T.begin());
+		string raiz; ss >> raiz;
+		
+		SetPositions(M, HerytanceMap, raiz, Vector2f(320.f, 0.f));
+	}
 	
+	/*
 	static void SetPositions(map<string, Node*>& M, tree<Q> T){
 		vector<list<string>> levels = listLevels(T);
 		for(size_t i = 0; i < levels.size(); ++i){
@@ -61,5 +79,5 @@ public:
 			}
 		}
 	}
-	
+	*/
 };
